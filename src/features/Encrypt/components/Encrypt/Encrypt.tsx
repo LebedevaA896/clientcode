@@ -6,16 +6,17 @@ import { download } from "utils";
 
 import { showWarning } from "features/Toast";
 
-import { clientEncryptFile } from "../../Encrypt.client";
-import { EncryptResponse } from "../../Encrypt.model";
+import { clientEncryptFile } from "../../Encrypt.client"; // запрос на сервер
+import { EncryptResponse } from "../../Encrypt.model"; // обработка отвера от сервера
 import styles from "./Encrypt.module.scss";
 
 const Encrypt = () => {
-	const [file, setFile] = useState<File>();
-	const [totalParts, setTotalParts] = useState(2);
-	const [neededParts, setNeededParts] = useState(2);
-	const fileInputRef = useRef<HTMLInputElement>(null);
+	const [file, setFile] = useState<File>(); // выбранный файл
+	const [totalParts, setTotalParts] = useState(2); //общее количество ключей
+	const [neededParts, setNeededParts] = useState(2); // пороговое значение ключей
+	const fileInputRef = useRef<HTMLInputElement>(null); // ссылка на элемент для ввода файла
 
+// handleFileChange обрабатывает выбор файла. Если выбран хотя бы один файл, сохраняет его в состоянии file
 	const handleFileChange = useCallback(
 		async (event: React.ChangeEvent<HTMLInputElement>) => {
 			if (event.target.files && event.target.files.length > 0) {
@@ -25,6 +26,8 @@ const Encrypt = () => {
 		[fileInputRef],
 	);
 
+/*Функция handleDownload создает объект Blob для зашифрованного сообщения и загружает его,
+добавляя расширение .enc. Затем создает Blob для ключей и также загружает их в виде отдельного файла.*/
 	const handleDownload = useCallback(
 		async (jsonData: EncryptResponse, fileName: string) => {
 			const encBlob = new Blob([jsonData.encMessage], {
@@ -40,15 +43,17 @@ const Encrypt = () => {
 		[],
 	);
 
+// проверка наличия файла (если выбран - запрос на сервер с пар. totalParts, neededParts)
 	const handleEncrypt = useCallback(async () => {
 		if (!file) {
 			showWarning(["Please select a file"]);
 			return;
 		}
+// После успешного ответа от сервера вызывает handleDownload для загрузки зашифрованного файла и ключей.
 
 		const response = await clientEncryptFile(file, totalParts, neededParts);
 		await handleDownload(response, file.name);
-
+// Очищает поле для выбора файла после шифрования.
 		if (fileInputRef.current) {
 			fileInputRef.current.value = "";
 		}
@@ -56,7 +61,7 @@ const Encrypt = () => {
 
 	return (
 		<div className={styles.container}>
-			<h1>Encrypt</h1>
+			<h1>Шифровать</h1>
 			<Form className={"col-8"}>
 				<Form.Group className="mb-3">
 					<Form.Control
@@ -66,7 +71,7 @@ const Encrypt = () => {
 					/>
 				</Form.Group>
 				<Form.Group className="mb-3">
-					<Form.Label>Total keys parts</Form.Label>
+					<Form.Label>Общее количество частей ключа</Form.Label>
 					<Form.Control
 						type={"number"}
 						min={2}
@@ -76,7 +81,7 @@ const Encrypt = () => {
 					/>
 				</Form.Group>
 				<Form.Group className="mb-3">
-					<Form.Label>Keys parts for decrypt</Form.Label>
+					<Form.Label>Части ключа для расшифровки</Form.Label>
 					<Form.Control
 						type={"number"}
 						min={2}
@@ -86,7 +91,7 @@ const Encrypt = () => {
 					/>
 				</Form.Group>
 				<Button onClick={handleEncrypt} className={styles.button}>
-					Encrypt
+					Шифровать
 				</Button>
 			</Form>
 		</div>
