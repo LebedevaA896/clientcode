@@ -98,7 +98,7 @@ const Decrypt = () => {
 						onChange={e => setFirstKey(e.target.value)}
 					/>
 				</Form.Group>
-// Если требуется больше одного ключа, отображает дополнительные поля для ввода ключей:
+
 				{totalKeys > 1 &&
 					keys.slice(1).map((key, index) => (
 						<Form.Group key={index + 1} className="mb-3">
