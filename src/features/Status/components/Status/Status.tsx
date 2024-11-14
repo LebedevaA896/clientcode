@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 
 import { clientStatusGet } from "../../Status.client";
 import styles from "./Status.module.scss";
-
+/* создание состояние ok, которое хранит информацию о том, доступен ли сервер
+(true — сервер работает, false — сервер недоступен).*/
 const Status = () => {
 	const [ok, setOk] = useState(false);
 
-	const getStatus = async () => {
+	const getStatus = async () => { // запрос статуса сервера
 		try {
 			const response = await clientStatusGet();
 			if (response?.status === "ok") {
@@ -23,11 +24,11 @@ const Status = () => {
 		getStatus();
 
 		const interval = setInterval(async () => {
-			getStatus();
-		}, 5000);
+			getStatus(); // обновление статуса в реальном времени
+		}, 5000); 
 
 		return () => {
-			clearInterval(interval);
+			clearInterval(interval); // прекращение обновления статуса
 		};
 	}, []);
 
