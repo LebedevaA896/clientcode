@@ -45,7 +45,7 @@ const Decrypt = () => {
 Очищает поле выбора файла после расшифровки.*/
 	const handleDecrypt = useCallback(async () => {
 		if (!file) {
-			showWarning(["Please select a file"]);
+			showWarning(["Пожалуйста выберите файл"]);
 			return;
 		}
 
