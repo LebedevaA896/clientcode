@@ -61,7 +61,7 @@ const Encrypt = () => {
 
 	return (
 		<div className={styles.container}>
-			<h1>Шифровать</h1>
+			<h1>Шифровать файл</h1>
 			<Form className={"col-8"}>
 				<Form.Group className="mb-3">
 					<Form.Control

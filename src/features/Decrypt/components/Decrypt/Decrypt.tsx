@@ -81,7 +81,7 @@ const Decrypt = () => {
 
 	return (
 		<div className={styles.container}>
-			<h1>Расшифровать</h1>
+			<h1>Расшифровать файл</h1>
 			<Form className={"col-8"}>
 				<Form.Group className="mb-3">
 					<Form.Control
