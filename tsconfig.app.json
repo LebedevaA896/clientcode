@@ -23,10 +23,10 @@
 
 		"paths": {
 			"@/*": ["src/*"],
-			"features/*": ["src/features/*"],
-			"assets/*": ["src/assets/*"],
-			"utils": ["src/utils"],
-			"interfaces": ["src/interfaces"]
+			"features/*": ["./src/features/*"],
+			"assets/*": ["./src/assets/*"],
+			"utils": ["./src/utils"],
+			"interfaces": ["./src/interfaces"]
 		}
 	},
 	"include": ["src"]
