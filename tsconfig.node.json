@@ -20,11 +20,11 @@
 		"noUncheckedSideEffectImports": true,
 
 		"paths": {
-			"@/*": ["src/*"],
-			"features/*": ["src/features/*"],
-			"assets/*": ["src/assets/*"],
-			"utils": ["src/utils"],
-			"interfaces": ["src/interfaces"]
+			"@/*": ["./src/*"],
+			"features/*": ["./src/features/*"],
+			"assets/*": ["./src/assets/*"],
+			"utils": ["./src/utils"],
+			"interfaces": ["./src/interfaces"]
 		}
 	},
 	"include": ["vite.config.ts"]
