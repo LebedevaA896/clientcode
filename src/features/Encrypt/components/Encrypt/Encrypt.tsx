@@ -46,7 +46,7 @@ const Encrypt = () => {
 // проверка наличия файла (если выбран - запрос на сервер с пар. totalParts, neededParts)
 	const handleEncrypt = useCallback(async () => {
 		if (!file) {
-			showWarning(["Please select a file"]);
+			showWarning(["Пожалуйста выберите файл"]);
 			return;
 		}
 // После успешного ответа от сервера вызывает handleDownload для загрузки зашифрованного файла и ключей.
